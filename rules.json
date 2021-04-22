@@ -1,0 +1,31 @@
+[
+  {
+    "id": "some-id",
+    "version": "v0.36.0-beta.4",
+    "upstream": {
+      "url": "http://139.196.49.27:9000",
+      "preserve_host": true,
+      "strip_path": "/api"
+    },
+    "match": {
+      "url": "http://localhost:4455/api/<.*>",
+      "methods": ["GET","POST"]
+    },
+    "authenticators": [{
+      "handler": "oauth2_introspection",
+      "config": {
+        "introspection_url": "http://81.68.87.190:4445/oauth2/introspect",
+        "scope_strategy": "exact"
+      }
+    }],
+    "authorizer": {
+      "handler": "remote_json",
+      "config": {
+        "remote": "http://139.196.49.27:9000/allow",
+        "payload": "{\"subject\": \"{{ print .Extra.client_id }}\", \"method\": \"{{ print .Extra.name }}\"}"
+      }
+    },
+    "mutators": [{ "handler": "noop" }]
+  }
+
+]

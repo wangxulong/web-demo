@@ -1,0 +1,16 @@
+GET http://localhost:4000/index
+Content-Type: application/json
+
+{
+  "name": "ex"
+}
+
+###
+GET http://139.196.49.27:9000/index
+Content-Type: application/json
+
+{
+"name": "ex"
+}
+
+
